@@ -45,6 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
       lastRow.appendChild(newOptionButton);
     }
     inputBox.value = "";
-    numberDisplay.textContent = "0";
+    numberDisplay.textContent = "-";
   }
 });
