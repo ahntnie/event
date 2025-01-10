@@ -5,18 +5,27 @@ document.addEventListener("DOMContentLoaded", () => {
   const optionsContainer = document.querySelector(".options-container");
 
   inputBox.addEventListener("input", () => {
-    numberDisplay.textContent = inputBox.value || "0";
+    numberDisplay.textContent = inputBox.value || "-";
+  });
+
+  inputBox.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+      handleOkClick();
+    }
   });
 
   okButton.addEventListener("click", () => {
+    handleOkClick();
+  });
+
+  function handleOkClick() {
     const newNumber = inputBox.value.trim();
 
-    if (newNumber === "" || isNaN(newNumber)) {
-      alert("Vui lòng nhập số hợp lệ!");
+    if (!/^\d{2}$/.test(newNumber) || parseInt(newNumber, 10) <= 9) {
+      alert("Vui lòng nhập một số hợp lệ có đúng 2 chữ số (10-99)!");
       return;
     }
 
-    // Tạo nút option mới
     const newOptionButton = document.createElement("button");
     newOptionButton.classList.add("option-button");
     newOptionButton.textContent = newNumber;
@@ -35,8 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
       lastRow.appendChild(newOptionButton);
     }
-
     inputBox.value = "";
     numberDisplay.textContent = "0";
-  });
+  }
 });
